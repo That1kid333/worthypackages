@@ -20,10 +20,13 @@ export default defineConfig({
           ui: ['lucide-react', 'framer-motion']
         }
       }
-    }
+    },
+    chunkSizeWarningLimit: 1000,
+    target: 'esnext',
+    minify: 'esbuild'
   },
   server: {
-    port: 5173,
+    port: 3000,
     strictPort: true,
     host: true
   }
