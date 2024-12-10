@@ -9,6 +9,12 @@
   from = "/*"
   to = "/index.html"
   status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
 
 [[headers]]
   for = "/assets/*"
@@ -22,5 +28,10 @@
 
 [[headers]]
   for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicon.ico"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
