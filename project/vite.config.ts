@@ -1,14 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/',
-  optimizeDeps: {
-    exclude: ['lucide-react'],
-  },
+  base: './', 
   build: {
     outDir: 'dist',
     sourcemap: true,
@@ -19,17 +14,14 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           ui: ['lucide-react', 'framer-motion']
-        }
+        },
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     },
-    chunkSizeWarningLimit: 1000,
+    cssCodeSplit: false,
     target: 'esnext',
     minify: 'esbuild'
-  },
-  server: {
-    port: 3000,
-    strictPort: true,
-    host: true
-  },
-  publicDir: 'public'
+  }
 });

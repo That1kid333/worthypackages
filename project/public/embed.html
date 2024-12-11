@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worthy Packages Embed Example</title>
+    <style>
+        /* Example container styles */
+        #worthy-packages-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container for the Worthy Packages app -->
+    <div id="worthy-packages-container"></div>
+
+    <!-- Load the app -->
+    <script type="module" src="./assets/embed.js"></script>
+    <script>
+        // Initialize the app when loaded
+        window.addEventListener('load', function() {
+            if (window.embedWorthyPackages) {
+                window.embedWorthyPackages('#worthy-packages-container');
+            }
+        });
+    </script>
+</body>
+</html>
