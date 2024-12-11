@@ -6,8 +6,9 @@
   "homepage": "https://that1kid333.github.io/worthypackages",
   "scripts": {
     "dev": "vite",
-    "build": "node ./node_modules/typescript/bin/tsc && node ./node_modules/vite/bin/vite.js build",
-    "build:embed": "node ./node_modules/typescript/bin/tsc && node ./node_modules/vite/bin/vite.js build --config vite.config.ts --entry src/embed.tsx",
+    "build": "npx tsc && npx vite build",
+    "vercel-build": "node vercel-build.js",
+    "build:embed": "npx tsc && npx vite build --config vite.config.ts --entry src/embed.tsx",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
