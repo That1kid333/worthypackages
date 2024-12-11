@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import type { Package } from './data';
+import { PackageDetails } from './PackageDetails';
+import { PricingInfo } from './PricingInfo';
 
 interface PackageCardProps {
   pkg: Package;
@@ -12,6 +14,9 @@ interface PackageCardProps {
   isExpanded: boolean;
   onCardClick: () => void;
   isActive: boolean;
+  showDetails?: boolean;
+  showPricing?: boolean;
+  onCloseDetails?: () => void;
 }
 
 export const PackageCard: React.FC<PackageCardProps> = ({
@@ -23,6 +28,9 @@ export const PackageCard: React.FC<PackageCardProps> = ({
   isExpanded,
   onCardClick,
   isActive,
+  showDetails,
+  showPricing,
+  onCloseDetails,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -47,7 +55,7 @@ export const PackageCard: React.FC<PackageCardProps> = ({
     <motion.div
       ref={cardRef}
       style={{ y }}
-      className={`${pkg.backgroundColor} ${pkg.textColor} shadow-xl overflow-hidden transition-all duration-500 ease-in-out`}
+      className={`${pkg.backgroundColor} ${pkg.textColor} shadow-xl overflow-visible transition-all duration-500 ease-in-out`}
     >
       <div className={`max-w-6xl mx-auto px-4 ${isActive ? 'py-4' : 'py-2.5'} transition-all duration-300`}>
         <motion.div 
@@ -79,7 +87,7 @@ export const PackageCard: React.FC<PackageCardProps> = ({
             marginTop: isActive ? '1rem' : 0
           }}
           transition={{ duration: 0.5 }}
-          className="overflow-hidden"
+          className="overflow-visible"
         >
           <div className="max-w-xl">
             <motion.p 
@@ -92,30 +100,50 @@ export const PackageCard: React.FC<PackageCardProps> = ({
             </motion.p>
             
             <div className="space-y-4">
-              <motion.button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onViewDetails();
-                }}
-                className="w-full text-left group flex items-center justify-between py-3 border-t border-current hover:bg-black/5 transition-colors"
-                whileHover={{ x: 8 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                VIEW DETAILS
-                <span className="transform group-hover:translate-x-2 transition-transform">→</span>
-              </motion.button>
-              <motion.button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onViewPricing();
-                }}
-                className="w-full text-left group flex items-center justify-between py-3 border-t border-current hover:bg-black/5 transition-colors"
-                whileHover={{ x: 8 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                PRICING INFORMATION
-                <span className="transform group-hover:translate-x-2 transition-transform">→</span>
-              </motion.button>
+              <div className="relative">
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onViewDetails();
+                  }}
+                  className="w-full text-left group flex items-center justify-between py-3 border-t border-current hover:bg-black/5 transition-colors"
+                  whileHover={{ x: 8 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  VIEW DETAILS
+                  <span className="transform group-hover:translate-x-2 transition-transform">→</span>
+                </motion.button>
+                {showDetails && !showPricing && (
+                  <div className="absolute left-[calc(100%+1rem)] top-0 min-w-[300px] z-10">
+                    <PackageDetails
+                      selectedPackage={pkg.title}
+                      onClose={onCloseDetails || (() => {})}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="relative">
+                <motion.button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onViewPricing();
+                  }}
+                  className="w-full text-left group flex items-center justify-between py-3 border-t border-current hover:bg-black/5 transition-colors"
+                  whileHover={{ x: 8 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  PRICING INFORMATION
+                  <span className="transform group-hover:translate-x-2 transition-transform">→</span>
+                </motion.button>
+                {showPricing && (
+                  <div className="absolute left-[calc(100%+1rem)] top-0 min-w-[300px] z-10">
+                    <PricingInfo
+                      selectedPackage={pkg}
+                      onClose={onCloseDetails || (() => {})}
+                    />
+                  </div>
+                )}
+              </div>
               <motion.a 
                 href={pkg.bookingLink}
                 target="_blank"

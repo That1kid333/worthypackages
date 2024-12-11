@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PackageCard } from './PackageCard';
-import { PackageDetails } from './PackageDetails';
-import { PricingInfo } from './PricingInfo';
 import { packages } from './data';
 import type { Package } from './data';
 
@@ -43,6 +41,7 @@ export const PricingPackages: React.FC<PricingPackagesProps> = ({
 
   const handleCloseDetails = () => {
     setShowDetails(false);
+    setShowPricing(false);
   };
 
   const handlePackageClick = (index: number) => {
@@ -64,7 +63,7 @@ export const PricingPackages: React.FC<PricingPackagesProps> = ({
             <div
               key={pkg.title}
               ref={el => packageRefs.current[index] = el}
-              className={`transition-all duration-500 ease-in-out`}
+              className="transition-all duration-500 ease-in-out"
             >
               <PackageCard
                 pkg={pkg}
@@ -75,22 +74,10 @@ export const PricingPackages: React.FC<PricingPackagesProps> = ({
                 isExpanded={true}
                 onCardClick={() => handlePackageClick(index)}
                 isActive={activePackageIndex === index}
+                showDetails={showDetails && selectedPackage === pkg.title}
+                showPricing={showPricing && selectedPackage === pkg.title}
+                onCloseDetails={handleCloseDetails}
               />
-              {activePackageIndex === index && showDetails && (
-                <div className="px-4 max-w-6xl mx-auto">
-                  {showPricing ? (
-                    <PricingInfo
-                      selectedPackage={pkg}
-                      onClose={handleCloseDetails}
-                    />
-                  ) : (
-                    <PackageDetails
-                      selectedPackage={pkg.title}
-                      onClose={handleCloseDetails}
-                    />
-                  )}
-                </div>
-              )}
             </div>
           ))}
         </div>
