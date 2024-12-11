@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/worthypackages/',  // Update this to match your repository name
+  base: '/',
   build: {
     outDir: 'dist',
     sourcemap: true,
@@ -23,5 +23,9 @@ export default defineConfig({
     cssCodeSplit: false,
     target: 'esnext',
     minify: 'esbuild'
+  },
+  server: {
+    port: 3000,
+    host: true
   }
 });
