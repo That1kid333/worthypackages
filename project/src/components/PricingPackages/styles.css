@@ -1,7 +1,7 @@
 /* Custom scrollbar styles */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -13,7 +13,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 3px;
 }
 
@@ -27,4 +27,9 @@
 
 .package-button > div {
   flex: 1;
+}
+
+/* Package container styles */
+.package-container {
+  position: relative;
 }
