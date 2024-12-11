@@ -18,14 +18,14 @@ export const PricingInfo: React.FC<PricingInfoProps> = ({
   return (
     <AnimatePresence>
       <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        className="mt-4 bg-[#253320] bg-opacity-95 rounded-md text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="bg-[#2D3C2A] rounded-md text-white my-4"
       >
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-medium">
+        <div className="p-4">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-base font-medium">
               Pricing Information
             </h3>
             <button
@@ -33,11 +33,11 @@ export const PricingInfo: React.FC<PricingInfoProps> = ({
               className="p-1 hover:bg-[#485541] rounded-full transition-colors"
               aria-label="Close pricing information"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
-          <div className="space-y-4">
-            <div className="text-xl font-bold">
+          <div className="space-y-3">
+            <div className="text-lg font-bold">
               {selectedPackage.pricing}
             </div>
             <p className="text-sm text-gray-200">
@@ -48,7 +48,7 @@ export const PricingInfo: React.FC<PricingInfoProps> = ({
               href={selectedPackage.bookingLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block w-full text-center bg-white text-[#253320] px-6 py-3 rounded-md hover:bg-gray-100 transition-colors duration-200 font-medium"
+              className="inline-block w-full text-center bg-white text-[#253320] px-4 py-2 rounded hover:bg-gray-100 transition-colors duration-200 text-sm font-medium"
             >
               Book Now
             </a>

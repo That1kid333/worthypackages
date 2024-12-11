@@ -22,14 +22,14 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({
   return (
     <AnimatePresence>
       <motion.div 
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        className="mt-4 bg-[#253320] bg-opacity-95 rounded-md text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="bg-[#2D3C2A] rounded-md text-white my-4"
       >
-        <div className="p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-medium">
+        <div className="p-4">
+          <div className="flex justify-between items-center mb-3">
+            <h3 className="text-base font-medium">
               Package Details
             </h3>
             <button
@@ -37,15 +37,15 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({
               className="p-1 hover:bg-[#485541] rounded-full transition-colors"
               aria-label="Close details"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
-          <div className="max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-            <ul className="space-y-3">
+          <div className="max-h-[250px] overflow-y-auto custom-scrollbar pr-2">
+            <ul className="space-y-2">
               {includedServices.map((service, index) => (
                 <li key={index} className="flex items-start">
-                  <Check className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0 text-green-400" />
-                  <span className="text-sm">{service.service}</span>
+                  <Check className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0 text-green-400" />
+                  <span className="text-sm text-gray-100">{service.service}</span>
                 </li>
               ))}
             </ul>

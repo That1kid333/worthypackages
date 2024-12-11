@@ -29,9 +29,6 @@ export const PricingPackages: React.FC<PricingPackagesProps> = ({
     return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
-  const headerHeight = 80;
-  const titleHeight = 80;
-
   const handleViewDetails = (packageTitle: string) => {
     setSelectedPackage(packageTitle);
     setShowPricing(false);
@@ -57,27 +54,17 @@ export const PricingPackages: React.FC<PricingPackagesProps> = ({
 
   return (
     <div className="relative bg-white" style={{ height, width }}>
-      <div className="flex">
+      <div className="flex flex-col">
         <div
           ref={containerRef}
-          className={`${
-            showDetails ? 'w-1/2' : 'w-full'
-          } transition-all duration-300 ease-in-out overflow-y-auto`}
+          className="w-full transition-all duration-300 ease-in-out overflow-y-auto"
           style={{ height: '100vh' }}
         >
           {packages.map((pkg, index) => (
             <div
               key={pkg.title}
               ref={el => packageRefs.current[index] = el}
-              className={`transition-all duration-500 ease-in-out ${
-                activePackageIndex !== null && activePackageIndex !== index
-                  ? 'h-[64px]'
-                  : ''
-              }`}
-              style={{
-                position: 'relative',
-                top: 0,
-              }}
+              className={`transition-all duration-500 ease-in-out`}
             >
               <PackageCard
                 pkg={pkg}
@@ -85,28 +72,29 @@ export const PricingPackages: React.FC<PricingPackagesProps> = ({
                 totalPackages={packages.length}
                 onViewDetails={() => handleViewDetails(pkg.title)}
                 onViewPricing={() => handleViewPricing(pkg)}
-                isExpanded={!showDetails}
+                isExpanded={true}
                 onCardClick={() => handlePackageClick(index)}
                 isActive={activePackageIndex === index}
               />
+              {activePackageIndex === index && showDetails && (
+                <div className="px-4 max-w-6xl mx-auto">
+                  {showPricing ? (
+                    <PricingInfo
+                      selectedPackage={pkg}
+                      onClose={handleCloseDetails}
+                    />
+                  ) : (
+                    <PackageDetails
+                      selectedPackage={pkg.title}
+                      onClose={handleCloseDetails}
+                    />
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
-      {showDetails &&
-        (showPricing ? (
-          <PricingInfo
-            selectedPackage={
-              packages.find((p) => p.title === selectedPackage) || null
-            }
-            onClose={handleCloseDetails}
-          />
-        ) : (
-          <PackageDetails
-            selectedPackage={selectedPackage}
-            onClose={handleCloseDetails}
-          />
-        ))}
     </div>
   );
 };
