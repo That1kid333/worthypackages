@@ -1,8 +1,9 @@
 {
+  "version": 2,
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "buildCommand": "npm run build",
+  "buildCommand": "chmod +x build.sh && ./build.sh",
   "installCommand": "npm install",
   "outputDirectory": "dist",
   "framework": "vite",
